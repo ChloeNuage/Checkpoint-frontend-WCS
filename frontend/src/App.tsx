@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/Home";
+import { CountryDetailsPage } from "./pages/CountryDetails";
 import { PageLayout } from "./components/Layout";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
@@ -15,9 +16,10 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
-          <Route Component={PageLayout}>
-            <Route path="/" Component={HomePage} />
-            <Route path="*" Component={() => <Navigate to="/" />} />
+          <Route element={<PageLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/country/:code" element={<CountryDetailsPage />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>
       </BrowserRouter>
